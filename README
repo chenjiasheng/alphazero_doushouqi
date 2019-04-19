@@ -1,0 +1,27 @@
+game.py
+    Game类:
+        一局游戏的一个实例
+
+board.py
+    Board类:
+        完整描述一个棋局.棋盘4×4的16个格子,从左上到右上,到左下到右下依次编号为0~15.
+        棋局信息包括:
+            grids: 16个格子的类型.格子类型共有18种,分別是8种棋子×2种颜色+砖块+空白.
+            bricked: 未翻开的砖块下的棋子列表
+            turn: 当前轮到哪一方下棋. 0,红色; 1,蓝色
+    Move类:
+        代表一步合法的棋招.由(src, dst)两个格子索引来表示.棋招的类型分为:
+            翻棋: src == dst 且 grids[src] == 砖块
+            移动: distance(src, dst) == 1 且 grids[src]是本方棋子 且 grids[dst] == 空白
+            吃子(或拼子): distance(src, dst) == 1 且 is_self(src) 且 is_oppo(dst) 且 src棋子 >= dst棋子
+            自杀: src == dst 且 is_self(src) 且 any(neighbour of src is oppo and neighbour棋子 > src棋子)
+
+human_player.py
+    HumanPlayer类:
+        代表人类棋手.从标准输入读入src, dst对作为棋手的棋招
+
+stochastic_mstc_player.py
+    纯mstc(支持stochastic)算法的player.
+
+doushouqi_minmax.py
+    暂时废弃
